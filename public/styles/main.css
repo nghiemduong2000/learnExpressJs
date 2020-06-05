@@ -85,11 +85,17 @@ table td a:hover {
 .form-create {
     align-items: center;
 }
+.input-create {
+    margin-bottom: 2rem;
+}
+
+.form-search {
+    margin-bottom: 3rem;
+}
 .input-search {
     font-size: 2rem;
     border-radius: .8rem;
     padding: .8rem 2rem;
-    margin-bottom: 2rem;
 }
 .input-commit {
     font-size: 2rem;

@@ -28,24 +28,12 @@ module.exports.view = (req, res) => {
 
 module.exports.createPost = (req, res) => {
     req.body.id = shortid.generate();
-    let errors = [];
-    if (!req.body.name) {
-        errors.push('Name is required.');
-    }
-    if (!req.body.phone) {
-        errors.push('Phone is required.');
-    }
-    if (errors.length) {
-        res.render('user/create', {
-            values: req.body,
-            errors: errors
-        });
-        return;
-    }
+    
     db.get('users').push(req.body).write();
     res.redirect('/users');
 }
 
 module.exports.create = (req, res) => {
+    console.log(req.cookies);
     res.render('user/create');
 }

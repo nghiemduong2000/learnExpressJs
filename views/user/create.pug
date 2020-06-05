@@ -9,9 +9,9 @@ block content
 
     form(action="/users/create", method="POST" class="")
         label.input-label(for="name") Name
-        input(id="name" name="name", type="text" class="form-control input-search", placeholder="Dien ho va ten" value=values ? values.name : "")
+        input(id="name" name="name", type="text" class="form-control input-search input-create", placeholder="Dien ho va ten" value=values ? values.name : "")
 
         label.input-label(for="name") Phone
-        input(id="phone" name="phone", type="tel" class="form-control input-search", placeholder="Dien so dien thoai" value=values ? values.phone : "")
+        input(id="phone" name="phone", type="tel" class="form-control input-search input-create", placeholder="Dien so dien thoai" value=values ? values.phone : "")
 
         button(class="btn btn-primary input-commit") Create

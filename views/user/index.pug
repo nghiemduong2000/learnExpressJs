@@ -2,7 +2,7 @@ extends ../layouts/common.pug
 
 block content
     h1 User list
-    form(action="/users/search", method="GET", class="d-flex")
+    form(action="/users/search", method="GET", class="d-flex form-search")
         input(type="text", name="search_query", value=keyword, class="form-control input-search" placeholder="Dien tu muon tim kiem")
         button(class="btn btn-primary ml-4 input-commit") Search
     a.createUser.btn-block(href="/users/create") ADD USER
