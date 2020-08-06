@@ -15,6 +15,11 @@ html(lang="en")
                         a(href='/', class="navbar__link") Home
                     li.navbar__item
                         a(href='/users', class="navbar__link") Users List
-                if user
-                    p= user.name       
+                    li.navbar__item
+                        a(href='/products', class="navbar__link") Product
+                    li.navbar__item
+                        a(href='/', class="navbar__link") Cart
+                    li.navbar__item
+                        if userCurrent
+                            p(class="navbar__userName")= userCurrent.name
         block content

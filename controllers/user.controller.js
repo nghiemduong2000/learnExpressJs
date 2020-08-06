@@ -1,15 +1,18 @@
-const db = require('../db');
-const shortid = require('shortid');
+// const db = require('../db');
+const User = require('../models/user.model');
+const md5 = require('md5');
 
-module.exports.index = (req, res) => {
+module.exports.index = async (req, res) => {
+    let users = await User.find();
     res.render(`user/index`, {
-        users: db.get('users').value(),
+        users: users,
     });
 }
 
-module.exports.search = (req, res) => {
+module.exports.search = async (req, res) => {
     let search_query = req.query.search_query;
-    let matchedUsers = db.get('users').value().filter((user) => {
+    let users = await User.find();
+    let matchedUsers = users.filter((user) => {
         return user.name.toLowerCase().indexOf(search_query.toLowerCase()) !== -1;
     })
     res.render(`user/index`, {
@@ -18,22 +21,25 @@ module.exports.search = (req, res) => {
     })
 }
 
-module.exports.view = (req, res) => {
+module.exports.view = async (req, res) => {
     const id = req.params.id;
-    const user = db.get('users').find({id: id}).value();
-    res.render('user/view', {
-        user: user
-    })
+    await User.findById(id, (err, ele) => {
+        res.render('user/view', {
+            user: ele
+        })
+    });
+    
 }
 
-module.exports.createPost = (req, res) => {
-    req.body.id = shortid.generate();
-    
-    db.get('users').push(req.body).write();
+module.exports.createPost = async (req, res) => {
+    req.body.avatar = req.file.path.split('/').slice(1).join('/');
+    req.body.password = md5(req.body.password);
+    await User.create(req.body, (err, ele) => {
+        if(err) return handleError(err);
+    });
     res.redirect('/users');
 }
 
 module.exports.create = (req, res) => {
-    console.log(req.cookies);
     res.render('user/create');
 }

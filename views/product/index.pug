@@ -1,0 +1,14 @@
+extends ../layouts/common.pug
+
+block content
+    h1 List Product
+    .container
+        .row
+            each item, index in products
+                .col-lg-3.col-sm-2(style="margin-bottom: 2rem")
+                    .card(style="text-align: center")
+                        img.card-img-top(src=`${item.image}`, alt='...')
+                        .card-body
+                            h5.card-title(style="font-size: 2.2rem;overflow: hidden; width: 20rem; white-space: nowrap; margin: auto; text-overflow: ellipsis")= item.name
+                            p.card-text(style="font-size: 1.4rem; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 4; height: 8rem; line-height: 2rem; overflow: hidden")=item.description
+                            a.btn.btn-primary(href='/cart/add/' + item.id style="font-size: 2rem") Add to cart

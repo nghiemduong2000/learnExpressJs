@@ -7,11 +7,20 @@ block content
         each error in errors
             .alert.alert-danger= error
 
-    form(action="/users/create", method="POST" class="")
+    form(action="/users/create", method="POST", enctype="multipart/form-data")
         label.input-label(for="name") Name
-        input(id="name" name="name", type="text" class="form-control input-search input-create", placeholder="Dien ho va ten" value=values ? values.name : "")
+        input(id="name", name="name", type="text", class="form-control input-search input-create", placeholder="Dien ho va ten", value=values ? values.name : "")
 
-        label.input-label(for="name") Phone
-        input(id="phone" name="phone", type="tel" class="form-control input-search input-create", placeholder="Dien so dien thoai" value=values ? values.phone : "")
+        label.input-label(for="email") Email
+        input(id="email", name="email", type="email", class="form-control input-search input-create", placeholder="Dien email", value=values ? values.email : "")
+
+        label.input-label(for="password") Password
+        input(id="password", name="password", type="password", class="form-control input-search input-create", placeholder="Dien mat khau", value=values ? values.password : "")
+
+        label.input-label(for="phone") Phone
+        input(id="phone", name="phone", type="tel", class="form-control input-search input-create", placeholder="Dien so dien thoai", value=values ? values.phone : "")
+
+        label.input-label(for="avatar") Avatar
+        input(id="avatar", name="avatar", type="file", class="form-control-file input-search input-create")
 
         button(class="btn btn-primary input-commit") Create

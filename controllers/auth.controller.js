@@ -8,9 +8,9 @@ module.exports.login = (req, res) => {
 module.exports.postLogin = (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
-    const user = db.get('users').find({email:email}).value();
+    const userCookie = db.get('users').find({email:email}).value();
 
-    if(!user) {
+    if(!userCookie) {
         res.render('auth/login', {
             errors: [
                 'User does not exist.'
@@ -22,7 +22,7 @@ module.exports.postLogin = (req, res) => {
 
     const hashedPassword = md5(password);
 
-    if(user.password !== hashedPassword) {
+    if(userCookie.password !== hashedPassword) {
         res.render('auth/login', {
             errors: [
                 'Wrong password'
@@ -31,7 +31,7 @@ module.exports.postLogin = (req, res) => {
         });
         return;
     }
-    res.cookie('userId', user.id, {
+    res.cookie('userId', userCookie.id, {
         signed: true
     });
     res.redirect('/users');

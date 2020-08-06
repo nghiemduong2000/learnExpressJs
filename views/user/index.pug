@@ -9,16 +9,23 @@ block content
 
     table.table
         colgroup
+            col(span="1", style="width: 10%")
             col(span="1", style="width: 40%")
-            col(span="1", style="width: 40%")
+            col(span="1", style="width: 30%")
             col(span="1", style="width: 20%")
         tbody    
             tr
                 th Name
                 th Phone
                 th Action
+                th Avatar
             each ele, index in users
                 tr
+                    td
+                        if ele.avatar 
+                            img(src=`${ele.avatar}` style="height: 4rem")
+                        else
+                            img(src=`/images/avaAlt.png` style="height: 4rem")
                     td= `${ele.name}`
                     td= ele.phone
                     td
